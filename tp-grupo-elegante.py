@@ -63,7 +63,7 @@ def pedir_posiciones(matriz_posiciones_stackeada):
     
     # se validara que el numero ingresado sea un entero, este en las posiciones mostradas en la
     #pantalla y ademas no haya sido seleccionado antes
-    while validacion_posicion==False:
+    while not validacion_posicion:
         try:
             posicion=int(input("Posicion: "))
             if 1<=posicion<=(int(const.FILAS*const.COLUMNAS)):
