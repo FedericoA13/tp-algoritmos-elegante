@@ -1,13 +1,12 @@
-FILAS=4 #este valor es modificable
-COLUMNAS=4 #este valor es fijo
+import constantes as const
 
 def matriz_juego():
     #creo 1 matriz de numeros que es la que vera el usuario
     matriz_posiciones=[]
-    FILAS_COMODIN=int(FILAS/FILAS) #Esto hace que se genere una sola linea que dps se cortara y stackeara 
+    FILAS_COMODIN=int(const.FILAS/const.FILAS) #Esto hace que se genere una sola linea que dps se cortara y stackeara 
     for i in range(FILAS_COMODIN):
         matriz_posiciones.append([])
-        for j in range(1,FILAS*COLUMNAS+1):
+        for j in range(1,const.FILAS*const.COLUMNAS+1):
             matriz_posiciones[i].append(j)
     
     #creo una matriz de letras aleatoria
@@ -15,15 +14,14 @@ def matriz_juego():
     import string
     import random
     matriz_letras_total=string.ascii_letters
-    matriz_letras=random.sample(matriz_letras_total,int(FILAS*COLUMNAS/2))
+    matriz_letras=random.sample(matriz_letras_total,int(const.FILAS*const.COLUMNAS/2))
     matriz_letras=(matriz_letras*2)
     random.shuffle(matriz_letras)
     
     #Agarro la linea de la matriz_posiciones y la la matriz_letra, las corto en partes = y las stackeo cada 1 en su matriz     
-    VALOR=4 #quiero que cada fila tenga 4 valores
-    if FILAS>1:
-        matriz_posiciones_stackeada=[matriz_posiciones[0][x:x+VALOR] for x in range(0,len(matriz_posiciones[0]),VALOR)]
-        matriz_letras_stackeada=[matriz_letras[x:x+VALOR] for x in range(0,len(matriz_letras),VALOR)]
+    if const.FILAS>1:
+        matriz_posiciones_stackeada=[matriz_posiciones[0][x:x+const.VALOR] for x in range(0,len(matriz_posiciones[0]),const.VALOR)]
+        matriz_letras_stackeada=[matriz_letras[x:x+const.VALOR] for x in range(0,len(matriz_letras),const.VALOR)]
     else:
         matriz_posiciones_stackeada=matriz_posiciones
         matriz_letras_stackeada=[matriz_letras]
@@ -34,8 +32,8 @@ def matriz_juego():
     
 def mostrar_fichas_posiciones(matriz_posiciones_stackeada,matriz_letras_stackeada):
     print("Fichas y Posiciones: ")
-    for i in range(int(FILAS)):
-        for j in range(int(COLUMNAS)):
+    for i in range(int(const.FILAS)):
+        for j in range(int(const.COLUMNAS)):
             if len(str(matriz_posiciones_stackeada[i][j]))==1:
                 print("[ ",str(matriz_posiciones_stackeada[i][j]),"]", end=" ")
             else:
@@ -48,7 +46,6 @@ def conversor_matriz(matriz):
 #convierte 1 matriz con 1 sola fila en una matriz con varias filas que coinciden con el
 #parametro FILAS seteado al principio. Y viciversa, convierte una matriz de varias filas en una
 #de 1 sola fila
-    VALOR=4 #quiero que cada fila tenga 4 valores
     if len(matriz)>1:
         matriz_nueva=[]
         for sublista in matriz:
@@ -56,7 +53,7 @@ def conversor_matriz(matriz):
                 matriz_nueva.append(item)
         matriz_nueva=[matriz_nueva]
     else:
-        matriz_nueva=[matriz[0][x:x+VALOR] for x in range(0,len(matriz[0]),VALOR)]
+        matriz_nueva=[matriz[0][x:x+const.VALOR] for x in range(0,len(matriz[0]),const.VALOR)]
         
     return matriz_nueva
 
@@ -69,7 +66,7 @@ def pedir_posiciones(matriz_posiciones_stackeada):
     while validacion_posicion==False:
         try:
             posicion=int(input("Posicion: "))
-            if 1<=posicion<=(int(FILAS*COLUMNAS)):
+            if 1<=posicion<=(int(const.FILAS*const.COLUMNAS)):
                 if posicion in matriz[0]:
                     validacion_posicion=True
                 else:
@@ -92,7 +89,7 @@ def main():
     letras_descubiertas=0
     intentos=0
     
-    while letras_descubiertas<int(FILAS*COLUMNAS/2):
+    while letras_descubiertas<int(const.FILAS*const.COLUMNAS/2):
         posicion1=pedir_posiciones(matriz_posiciones_stackeada)-1
         
         #convierto matriz mostrada en pantalla en matriz de 1 fila y asigno operaciones
@@ -120,7 +117,7 @@ def main():
         mostrar_fichas_posiciones(matriz_posiciones_stackeada,matriz_letras_stackeada)
         
         #se crea lista que retorna a los valores originales las posiciones que el usuario pidio ver
-        lista_validacion=[x for x in range(1,FILAS*COLUMNAS+1)]
+        lista_validacion=[x for x in range(1,const.FILAS*const.COLUMNAS+1)]
         
         if ficha1!=ficha2:
             matriz_posiciones_stackeada=conversor_matriz(matriz_posiciones_stackeada)
@@ -141,7 +138,7 @@ def main():
             letras_descubiertas=letras_descubiertas+1
             intentos=intentos+1
             
-    print("Felicitaciones. Has encontrado todos los pares de letras. Has ganado")
+    print("Felicitaciones. Has encontrado todos los pares de letras. Has ganado.")
     print("Te ha llevado",intentos,"intentos resolver el memotest")
             
 main()
