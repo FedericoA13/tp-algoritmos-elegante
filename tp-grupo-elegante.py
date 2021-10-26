@@ -1,4 +1,6 @@
 import constantes as const
+import string
+import random
 
 def matriz_juego():
     #creo 1 matriz de numeros que es la que vera el usuario
@@ -11,8 +13,6 @@ def matriz_juego():
     
     #creo una matriz de letras aleatoria
     matriz_letras=[]
-    import string
-    import random
     matriz_letras_total=string.ascii_letters
     matriz_letras=random.sample(matriz_letras_total,int(const.FILAS*const.COLUMNAS/2))
     matriz_letras=(matriz_letras*2)
