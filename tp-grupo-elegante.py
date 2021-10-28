@@ -57,7 +57,7 @@ def conversor_matriz(matriz):
         
     return matriz_nueva
 
-def pedir_posiciones(matriz_posiciones_stackeada):
+def pedir_posiciones(matriz_posiciones_stackeada,contador_posicion):
     validacion_posicion=False
     matriz=conversor_matriz(matriz_posiciones_stackeada)
     
@@ -65,7 +65,10 @@ def pedir_posiciones(matriz_posiciones_stackeada):
     #pantalla y ademas no haya sido seleccionado antes
     while not validacion_posicion:
         try:
-            posicion=int(input("Posicion: "))
+            if contador_posicion==1:
+                posicion=int(input("Ingrese 1ra posicion: "))
+            else:
+                posicion=int(input("Ingrese 2da posicion: "))
             if 1<=posicion<=(int(const.FILAS*const.COLUMNAS)):
                 if posicion in matriz[0]:
                     validacion_posicion=True
@@ -90,7 +93,8 @@ def main():
     intentos=0
     
     while letras_descubiertas<int(const.FILAS*const.COLUMNAS/2):
-        posicion1=pedir_posiciones(matriz_posiciones_stackeada)-1
+        contador_posicion=1
+        posicion1=pedir_posiciones(matriz_posiciones_stackeada,contador_posicion)-1
         
         #convierto matriz mostrada en pantalla en matriz de 1 fila y asigno operaciones
         matriz_letras_stackeada=conversor_matriz(matriz_letras_stackeada)
@@ -103,7 +107,8 @@ def main():
         matriz_posiciones_stackeada=conversor_matriz(matriz_posiciones_stackeada)
         mostrar_fichas_posiciones(matriz_posiciones_stackeada,matriz_letras_stackeada)
         
-        posicion2=pedir_posiciones(matriz_posiciones_stackeada)-1
+        contador_posicion=2
+        posicion2=pedir_posiciones(matriz_posiciones_stackeada,contador_posicion)-1
         
         #convierto matriz mostrada en pantalla en matriz de 1 fila y asigno operaciones
         matriz_letras_stackeada=conversor_matriz(matriz_letras_stackeada)
