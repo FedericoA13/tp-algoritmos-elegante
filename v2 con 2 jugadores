@@ -185,7 +185,17 @@ def main():
         print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
     
     print("Felicitaciones. Han encontrado todos los pares de letras")
-    print (intentos_jugador_shuffle)
-
+    
+    if intentos_jugador_shuffle[0][1]>intentos_jugador_shuffle[1][1]:
+        print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[0],intentos_jugador_shuffle[0][1]))
+    elif intentos_jugador_shuffle[0][1]<intentos_jugador_shuffle[1][1]:
+        print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[1],intentos_jugador_shuffle[1][1]))
+    else:
+        if intentos_jugador_shuffle[0][0]<intentos_jugador_shuffle[1][0]:
+            print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[0],intentos_jugador_shuffle[0][1],matriz_jugadores[0]))
+        elif intentos_jugador_shuffle[0][0]>intentos_jugador_shuffle[1][0]:
+            print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[1],intentos_jugador_shuffle[1][1],matriz_jugadores[1]))
+        else:
+            print("El juego termino en empate. Ambos encontraron {} pares de fichas en {} intentos".format(intentos_jugador_shuffle[0][0],intentos_jugador_shuffle[0][1]))
             
 main()
