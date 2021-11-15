@@ -154,11 +154,11 @@ def main():
             matriz_letras_stackeada=conversor_matriz(matriz_letras_stackeada)
             
             if turno_jugador_shuffle==matriz_jugadores[0]:
-                intentos_jugador_shuffle[0][0]=intentos_jugador_shuffle_1+1
+                intentos_jugador_shuffle[0][0]=intentos_jugador_shuffle[0][0]+1
                 print("Mala suerte",matriz_jugadores[0],"las posiciones seleccionadas no tenian la misma letra. Le toca jugar a",matriz_jugadores[1])
                 turno_jugador_shuffle=matriz_jugadores[1]
             else:
-                intentos_jugador_shuffle[1][0]=intentos_jugador_shuffle_2+1
+                intentos_jugador_shuffle[1][0]=intentos_jugador_shuffle[1][0]+1
                 print("Mala suerte",matriz_jugadores[1],"las posiciones seleccionadas no tenian la misma letra. Le toca jugar a",matriz_jugadores[0])
                 turno_jugador_shuffle=matriz_jugadores[0]
             
@@ -167,21 +167,21 @@ def main():
             letras_descubiertas=letras_descubiertas+1
             if letras_descubiertas <(int(FILAS*COLUMNAS/2)):
                 if turno_jugador_shuffle==matriz_jugadores[0]:
-                    intentos_jugador_shuffle[0][0]=intentos_jugador_shuffle_1+1
-                    intentos_jugador_shuffle[0][1]=letras_descubiertas_jugador_1+1
+                    intentos_jugador_shuffle[0][0]=intentos_jugador_shuffle[0][0]+1
+                    intentos_jugador_shuffle[0][1]=intentos_jugador_shuffle[0][1]+1
                     print("Muy bien",matriz_jugadores[0],"encontraste un par de letras iguales. Puedes continuar jugando")
                 else:
-                    intentos_jugador_shuffle[1][0]=intentos_jugador_shuffle_2+1
-                    intentos_jugador_shuffle[1][1]=letras_descubiertas_jugador_2+1
+                    intentos_jugador_shuffle[1][0]=intentos_jugador_shuffle[1][0]+1
+                    intentos_jugador_shuffle[1][1]=intentos_jugador_shuffle[1][1]+1
                     print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Puedes continuar jugando")
                 
     if turno_jugador_shuffle==matriz_jugadores[0]:
-        intentos_jugador_shuffle[0][0]=intentos_jugador_shuffle_1+1
-        intentos_jugador_shuffle[0][1]=letras_descubiertas_jugador_1+1
+        intentos_jugador_shuffle[0][0]=intentos_jugador_shuffle[0][0]+1
+        intentos_jugador_shuffle[0][1]=intentos_jugador_shuffle[0][1]+1
         print("Muy bien",matriz_jugadores[0],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
     else:
-        intentos_jugador_shuffle[1][0]=intentos_jugador_shuffle_2+1
-        intentos_jugador_shuffle[1][1]=letras_descubiertas_jugador_2+1
+        intentos_jugador_shuffle[1][0]=intentos_jugador_shuffle[1][0]+1
+        intentos_jugador_shuffle[1][1]=intentos_jugador_shuffle[1][1]+1
         print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
     
     print("Felicitaciones. Han encontrado todos los pares de letras")
