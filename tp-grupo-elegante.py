@@ -126,7 +126,7 @@ def ganador_memotest(lista_intentos_letras_descubiertas,matriz_jugadores):
         elif lista_intentos_letras_descubiertas[0][0]>lista_intentos_letras_descubiertas[1][0]:
             resultado=print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[1],lista_intentos_letras_descubiertas[1][1],matriz_jugadores[1]))
         else:
-            resultado=print("El juego termino en empate. Ambos encontraron {} pares de fichas en {} intentos".format(int(lista_intentos_letras_descubiertas[0][0]/2),lista_intentos_letras_descubiertas[0][1]))
+            resultado=print("El juego termino en empate. Ambos encontraron {} pares de fichas en {} intentos".format(lista_intentos_letras_descubiertas[0][1],lista_intentos_letras_descubiertas[0][0]))
     
     return resultado
 
