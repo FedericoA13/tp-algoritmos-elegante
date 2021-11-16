@@ -5,12 +5,9 @@ import random
 def matriz_juego():
     #creo 1 matriz de numeros que es la que vera el usuario
     matriz_posiciones=[]
-    FILAS_COMODIN=int(const.FILAS/const.FILAS) #Esto hace que se genere una sola linea que dps se cortara y stackeara 
-    for i in range(FILAS_COMODIN):
-        matriz_posiciones.append([])
-        for j in range(1,const.FILAS*const.COLUMNAS+1):
-            matriz_posiciones[i].append(j)
-    
+    for i in range(1,int(const.FILAS*const.COLUMNAS+1)):
+        matriz_posiciones.append(i)
+
     #creo una matriz de letras aleatoria
     matriz_letras=[]
     matriz_letras_total=string.ascii_letters
@@ -18,24 +15,23 @@ def matriz_juego():
     matriz_letras=(matriz_letras*2)
     random.shuffle(matriz_letras)
     
-    #Agarro la linea de la matriz_posiciones y la la matriz_letra, las corto en partes = y las stackeo cada 1 en su matriz     
+    #Agarro la matriz_posiciones y la matriz_letras, las corto en partes = y las apilo cada 1 en su matriz     
     if const.FILAS>1:
-        matriz_posiciones_stackeada=[matriz_posiciones[0][x:x+const.VALOR] for x in range(0,len(matriz_posiciones[0]),const.VALOR)]
-        matriz_letras_stackeada=[matriz_letras[x:x+const.VALOR] for x in range(0,len(matriz_letras),const.VALOR)]
+        matriz_posiciones_apiladas=[matriz_posiciones[x:x+const.VALOR] for x in range(0,len(matriz_posiciones),const.VALOR)]
+        matriz_letras_apiladas=[matriz_letras[x:x+const.VALOR] for x in range(0,len(matriz_letras),const.VALOR)]
     else:
-        matriz_posiciones_stackeada=matriz_posiciones
-        matriz_letras_stackeada=[matriz_letras]
-#     print (matriz_posiciones_split)
-#     print (matriz_letras_split)
+        matriz_posiciones_apiladas=[matriz_posiciones]
+        matriz_letras_apiladas=[matriz_letras]
         
-    return matriz_posiciones_stackeada, matriz_letras_stackeada
+    return matriz_posiciones_apiladas, matriz_letras_apiladas
     
-def mostrar_fichas_posiciones(matriz_posiciones_stackeada,matriz_letras_stackeada):
+def mostrar_fichas_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas):
+    #esta funcion convierte las matrices de la funcion matriz_juego en su version para ser impresas en pantalla
     print("Fichas y Posiciones: ")
     for i in range(int(const.FILAS)):
         for j in range(int(const.COLUMNAS)):
-            if len(str(matriz_posiciones_stackeada[i][j]))==1:
-                print("[ ",str(matriz_posiciones_stackeada[i][j]),"]", end=" ")
+            if len(str(matriz_posiciones_apiladas[i][j]))==1:
+                print("[ ",str(matriz_posiciones_apiladas[i][j]),"]", end=" ")
             else:
                 print("[",str(matriz_posiciones_stackeada[i][j]),"]", end=" ")
         print()
