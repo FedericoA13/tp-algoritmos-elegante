@@ -25,21 +25,22 @@ def matriz_juego():
         
     return matriz_posiciones_apiladas, matriz_letras_apiladas
     
-def mostrar_fichas_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas):
-    #esta funcion convierte las matrices de la funcion matriz_juego en su version para ser impresas en pantalla
+def mostrar_fichas_posiciones(matriz_posiciones_apiladas):
+    #esta funcion convierte la matriz_posiciones_apiladas en su version para ser impresa en pantalla
     print("Fichas y Posiciones: ")
     for i in range(int(const.FILAS)):
         for j in range(int(const.COLUMNAS)):
+            #si el numero de posicion en la matriz es < 10 necesita agregarle un espacio para que los numeros queden bien alineados en la matriz impresa
             if len(str(matriz_posiciones_apiladas[i][j]))==1:
                 print("[ ",str(matriz_posiciones_apiladas[i][j]),"]", end=" ")
             else:
-                print("[",str(matriz_posiciones_stackeada[i][j]),"]", end=" ")
+                print("[",str(matriz_posiciones_apiladas[i][j]),"]", end=" ")
         print()
         
     return
 
 def conversor_matriz(matriz):
-#convierte 1 matriz con 1 sola fila en una matriz con varias filas que coinciden con el
+#esta funcion convierte 1 matriz con 1 sola fila en una matriz con varias filas que coinciden con el
 #parametro FILAS seteado al principio. Y viciversa, convierte una matriz de varias filas en una
 #de 1 sola fila
     if len(matriz)>1:
