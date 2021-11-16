@@ -114,24 +114,23 @@ def resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas
     
     return matriz_posiciones_apiladas, matriz_letras_apiladas
 
-def ganador_memotest(lista_intentos_letras_descubiertas,matriz_jugadores):
+def ganador_memotest(intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores):
     #esta funcion devuelve al ganador del juego si hubo uno o muestra empate
-    if lista_intentos_letras_descubiertas[0][1]>lista_intentos_letras_descubiertas[1][1]:
-        resultado=print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[0],lista_intentos_letras_descubiertas[0][1]))
-    elif lista_intentos_letras_descubiertas[0][1]<lista_intentos_letras_descubiertas[1][1]:
-        resultado=print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[1],lista_intentos_letras_descubiertas[1][1]))
+    if letras_descubiertas_jugador_shuffle_1>letras_descubiertas_jugador_shuffle_2:
+        resultado=print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[jugador_shuffle_1],letras_descubiertas_jugador_shuffle_1))
+    elif letras_descubiertas_jugador_shuffle_1<letras_descubiertas_jugador_shuffle_2:
+        resultado=print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[jugador_shuffle_2],letras_descubiertas_jugador_shuffle_2))
     else:
-        if lista_intentos_letras_descubiertas[0][0]<lista_intentos_letras_descubiertas[1][0]:
-            resultado=print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[0],lista_intentos_letras_descubiertas[0][1],matriz_jugadores[0]))
-        elif lista_intentos_letras_descubiertas[0][0]>lista_intentos_letras_descubiertas[1][0]:
-            resultado=print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[1],lista_intentos_letras_descubiertas[1][1],matriz_jugadores[1]))
+        if intentos_jugador_shuffle_1<intentos_jugador_shuffle_2:
+            resultado=print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[jugador_shuffle_1],letras_descubiertas_jugador_shuffle_1,matriz_jugadores[jugador_shuffle_1]))
+        elif intentos_jugador_shuffle_1>intentos_jugador_shuffle_2:
+            resultado=print ("El ganador de la partida es {}. Ambos encontraron {} pares de fichas pero {} lo hizo en menos intentos".format(matriz_jugadores[jugador_shuffle_2],letras_descubiertas_jugador_shuffle_2,matriz_jugadores[jugador_shuffle_2]))
         else:
-            resultado=print("El juego termino en empate. Ambos encontraron {} pares de fichas en {} intentos".format(lista_intentos_letras_descubiertas[0][1],lista_intentos_letras_descubiertas[0][0]))
+            resultado=print("Ha ocurrido un empate. Ambos encontraron {} pares de fichas en {} intentos".format(letras_descubiertas_jugador_shuffle_1,intentos_jugador_shuffle_1))
     
     return resultado
 
 def main():
-    
     print("Bienvenido al juego del Memotest")
     jugador_1=str(input("Jugador 1, ingrese su nombre: "))
     jugador_2=str(input("Jugador 2, ingrese su nombre: "))
@@ -144,14 +143,15 @@ def main():
     matriz_posiciones_apiladas, matriz_letras_apiladas=matriz_juego()
     mostrar_fichas_posiciones(matriz_posiciones_apiladas)
     
-    letras_descubiertas=0
-    intentos_jugador_shuffle_1=0
-    intentos_jugador_shuffle_2=0
-    letras_descubiertas_jugador_1=0
-    letras_descubiertas_jugador_2=0
-    lista_intentos_letras_descubiertas=[[intentos_jugador_shuffle_1,letras_descubiertas_jugador_1],[intentos_jugador_shuffle_2,letras_descubiertas_jugador_2]]
+    letras_descubiertas=0 #contador de letras descubiertas
+    intentos_jugador_shuffle_1=0 #contador intentos del jugador 1 de la matriz mezclada
+    intentos_jugador_shuffle_2=0 #contador intentos del jugador 2 de la matriz mezclada
+    letras_descubiertas_jugador_shuffle_1=0 #contador letras descubiertas del jugador 1 de la matriz mezclada
+    letras_descubiertas_jugador_shuffle_2=0 #contador letras descubiertas del jugador 2 de la matriz mezclada
+    jugador_shuffle_1=0 #posicion que ocupa el jugador 1 en la matriz_jugadores mezclada
+    jugador_shuffle_2=1 #posicion que ocupa el jugador 1 en la matriz_jugadores mezclada
     
-    while letras_descubiertas<int(FILAS*COLUMNAS/2):
+    while letras_descubiertas<int(const.FILAS*const.COLUMNAS/2):
         contador_posicion=1
         posicion1=pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion)-1
         ficha1, matriz_posiciones_apiladas, matriz_letras_apiladas = buscar_reemplazar_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas,posicion1)
@@ -165,40 +165,40 @@ def main():
         if ficha1!=ficha2:
             matriz_posiciones_apiladas, matriz_letras_apiladas = resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas,posicion1,posicion2)
         
-            if turno_jugador_shuffle==matriz_jugadores[0]:
-                lista_intentos_letras_descubiertas[0][0]+=1
-                print("Mala suerte",matriz_jugadores[0],"las posiciones seleccionadas no tenian la misma letra. Le toca jugar a",matriz_jugadores[1])
-                turno_jugador_shuffle=matriz_jugadores[1]
+            if turno_jugador_shuffle==matriz_jugadores[jugador_shuffle_1]:
+                intentos_jugador_shuffle_1+=1
+                print("Mala suerte",matriz_jugadores[jugador_shuffle_1],"las posiciones seleccionadas no tenian la misma letra. Le toca jugar a",matriz_jugadores[jugador_shuffle_2])
+                turno_jugador_shuffle=matriz_jugadores[jugador_shuffle_2]
             else:
-                lista_intentos_letras_descubiertas[1][0]+=1
-                print("Mala suerte",matriz_jugadores[1],"las posiciones seleccionadas no tenian la misma letra. Le toca jugar a",matriz_jugadores[0])
-                turno_jugador_shuffle=matriz_jugadores[0]
+                intentos_jugador_shuffle_2+=1
+                print("Mala suerte",matriz_jugadores[jugador_shuffle_2],"las posiciones seleccionadas no tenian la misma letra. Le toca jugar a",matriz_jugadores[jugador_shuffle_1])
+                turno_jugador_shuffle=matriz_jugadores[jugador_shuffle_1]
             
             mostrar_fichas_posiciones(matriz_posiciones_apiladas)
         else:
             letras_descubiertas+=1
             #esta parte le informa al jugador que puede continuar jugando porque aun hay letras sin encontrar
-            if letras_descubiertas<int(FILAS*COLUMNAS/2):
-                if turno_jugador_shuffle==matriz_jugadores[0]:
-                    lista_intentos_letras_descubiertas[0][0]+=1
-                    lista_intentos_letras_descubiertas[0][1]+=1
-                    print("Muy bien",matriz_jugadores[0],"encontraste un par de letras iguales. Puedes continuar jugando")
+            if letras_descubiertas<int(const.FILAS*const.COLUMNAS/2):
+                if turno_jugador_shuffle==matriz_jugadores[jugador_shuffle_1]:
+                    intentos_jugador_shuffle_1+=1
+                    letras_descubiertas_jugador_shuffle_1+=1
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_1],"encontraste un par de letras iguales. Puedes continuar jugando")
                 else:
-                    lista_intentos_letras_descubiertas[1][0]+=1
-                    lista_intentos_letras_descubiertas[1][1]+=1
-                    print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Puedes continuar jugando")
-            #esta parte le informa al jugador que todas las letras fueron encontradas
+                    intentos_jugador_shuffle_2+=1
+                    letras_descubiertas_jugador_shuffle_2+=1
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Puedes continuar jugando")
+            #esta parte le informa al jugador que todas las letras fueron descubiertas                    
             else:
-                if turno_jugador_shuffle==matriz_jugadores[0]:
-                    lista_intentos_letras_descubiertas[0][0]+=1
-                    lista_intentos_letras_descubiertas[0][1]+=1
-                    print("Muy bien",matriz_jugadores[0],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
+                if turno_jugador_shuffle==matriz_jugadores[jugador_shuffle_1]:
+                    intentos_jugador_shuffle_1+=1
+                    letras_descubiertas_jugador_shuffle_1+=1
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
                 else:
-                    lista_intentos_letras_descubiertas[1][0]+=1
-                    lista_intentos_letras_descubiertas[1][1]+=1
-                    print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
-
+                    intentos_jugador_shuffle_2+=1
+                    letras_descubiertas_jugador_shuffle_2+=1
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
+                    
     print("Felicitaciones. El juego ha terminado")
-    ganador_memotest(lista_intentos_letras_descubiertas,matriz_jugadores)
+    ganador_memotest(intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores)
     
 main()
