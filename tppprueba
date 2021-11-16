@@ -246,8 +246,10 @@ def multijugador():
         intentos_jugador_shuffle[1][1]=intentos_jugador_shuffle[1][1]+1
         print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
     tiempo_final=default_timer()
-    print(f"Felicitaciones. Han encontrado todos los pares de letras, en un tiempo de: {round(tiempo_final-tiempo_inicial,2)}")
-    print (intentos_jugador_shuffle)
+    print(f"Felicitaciones. Han encontrado todos los pares de letras.")
+    jugadorGanador=ganador(intentos_jugador_shuffle)
+    jugadorIntentos=intentos(intentos_jugador_shuffle)
+    print(f"El jugador ganador es {matriz_jugadores[jugadorGanador]} con {intentos_jugador_shuffle[jugadorGanador][jugadorIntentos]} intentos\nEn un tiempo de: {round(tiempo_final-tiempo_inicial,2)} segundos ")
 
 
 def main():
@@ -266,6 +268,28 @@ def cantidad_jugadores():
 def nombre_jugadores():
     nombre=str(input("ingrese su nombre: "))
     return nombre
+    
+def ganador(intentos_jugador_shuffle):
+    ganadorintentos=0
+    if intentos_jugador_shuffle[0][1]>intentos_jugador_shuffle[1][1]:
+        ganadorintentos=0
+    elif intentos_jugador_shuffle[0][1]<intentos_jugador_shuffle[1][1]:
+        ganadorintentos=1
+    else:
+        if intentos_jugador_shuffle[0][0]>intentos_jugador_shuffle[1][0]:
+            ganadorintentos=0
+        else:
+            ganadorintentos=1
+    return ganadorintentos
+            
+
+def intentos(intentos_jugador_shuffle): 
+    intentosJugador=0
+    if intentos_jugador_shuffle[0][0]>intentos_jugador_shuffle[1][0]:
+        intentosJugador=0
+    else:
+        intentosJugador=1
+    return intentosJugador
 
 def interfaz_grafica():
     raiz= Tk()
