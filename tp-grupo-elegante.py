@@ -177,6 +177,7 @@ def main():
             mostrar_fichas_posiciones(matriz_posiciones_apiladas)
         else:
             letras_descubiertas+=1
+            #esta parte le informa al jugador que puede continuar jugando porque aun hay letras sin encontrar
             if letras_descubiertas<int(FILAS*COLUMNAS/2):
                 if turno_jugador_shuffle==matriz_jugadores[0]:
                     lista_intentos_letras_descubiertas[0][0]+=1
@@ -186,16 +187,17 @@ def main():
                     lista_intentos_letras_descubiertas[1][0]+=1
                     lista_intentos_letras_descubiertas[1][1]+=1
                     print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Puedes continuar jugando")
-    
-    if turno_jugador_shuffle==matriz_jugadores[0]:
-        lista_intentos_letras_descubiertas[0][0]+=1
-        lista_intentos_letras_descubiertas[0][1]+=1
-        print("Muy bien",matriz_jugadores[0],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
-    else:
-        lista_intentos_letras_descubiertas[1][0]+=1
-        lista_intentos_letras_descubiertas[1][1]+=1
-        print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
-    
+            #esta parte le informa al jugador que todas las letras fueron encontradas
+            else:
+                if turno_jugador_shuffle==matriz_jugadores[0]:
+                    lista_intentos_letras_descubiertas[0][0]+=1
+                    lista_intentos_letras_descubiertas[0][1]+=1
+                    print("Muy bien",matriz_jugadores[0],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
+                else:
+                    lista_intentos_letras_descubiertas[1][0]+=1
+                    lista_intentos_letras_descubiertas[1][1]+=1
+                    print("Muy bien",matriz_jugadores[1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
+
     print("Felicitaciones. El juego ha terminado")
     ganador_memotest(lista_intentos_letras_descubiertas,matriz_jugadores)
     
