@@ -101,7 +101,7 @@ def resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas
     #a la posicion que ocupaba la letra (es la inversa de la funcion buscar_reemplazar_posiciones)
     
     #creo lista con numeros que son los que van a reemplazar a las letras (notar que tiene el mismo orden que la matriz_posiciones_apiladas)
-    lista_validacion=[x for x in range(1,FILAS*COLUMNAS+1)]
+    lista_validacion=[x for x in range(1,int(const.FILAS*const.COLUMNAS+1))]
     
     matriz_posiciones_apiladas=conversor_matriz(matriz_posiciones_apiladas)
     matriz_letras_apiladas=conversor_matriz(matriz_letras_apiladas)
