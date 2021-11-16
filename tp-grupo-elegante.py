@@ -54,11 +54,11 @@ def conversor_matriz(matriz):
         
     return matriz_nueva
 
-def pedir_posiciones(matriz_posiciones_stackeada,contador_posicion):
+def pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion):
     validacion_posicion=False
-    matriz=conversor_matriz(matriz_posiciones_stackeada)
+    matriz_a_chequear=conversor_matriz(matriz_posiciones_apiladas)
     
-    # se validara que el numero ingresado sea un entero, este en las posiciones mostradas en la
+    #esta funcion validara que el numero ingresado sea un entero, este en las posiciones mostradas en la
     #pantalla y ademas no haya sido seleccionado antes
     while not validacion_posicion:
         try:
@@ -67,16 +67,16 @@ def pedir_posiciones(matriz_posiciones_stackeada,contador_posicion):
             else:
                 posicion=int(input("Ingrese 2da posicion: "))
             if 1<=posicion<=(int(const.FILAS*const.COLUMNAS)):
-                if posicion in matriz[0]:
+                if posicion in matriz_a_chequear[0]:
                     validacion_posicion=True
                 else:
-                    print("Ha ingresado un valor ya seleccionado antes. Vuelva a ingresar un valor")
+                    print("Ingresaste un valor ya seleccionado antes. Volve a ingresar otro valor")
                     validacion_posicion=False    
             else:
-                print("Ha ingresado un valor fuera del rango permitido. Vuelva a ingresar un valor")
+                print("Ingresaste un valor fuera del rango permitido. Solo podes ingresar los valores que ves en pantalla. Volve a ingresar otro valor")
                 validacion_posicion=False
         except:
-            print("No has ingresado un valor numerico. Vuelve a ingresar un valor")
+            print("Ingresaste un valor o caracter no permitido. Solo podes ingresar los valores que ves en pantalla. Vuelve a ingresar otro valor")
             validacion_posicion=False
             
     return posicion
