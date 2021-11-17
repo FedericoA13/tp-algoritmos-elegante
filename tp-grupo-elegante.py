@@ -3,6 +3,7 @@ import string
 import random
 from timeit import default_timer
 from tkinter import *
+import math
 
 def matriz_juego():
     """
@@ -288,6 +289,19 @@ def main():
                     print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Ya no quedan más letras por encontrar")
                     
     tiempo_final=default_timer()
+    
+    minutos=math.floor((tiempo_final - tiempo_inicial)/60)
+    segundos=math.floor(((tiempo_final - tiempo_inicial)/60-math.floor((tiempo_final - tiempo_inicial)/60))*60)
+    
+    if tiempo_final - tiempo_inicial<60:
+        print("Felicitaciones. El juego ha terminado. La partida duró {} segundos".format(segundos))
+    elif int(minutos)==1 and not int(segundos)==1:
+        print("Felicitaciones. El juego ha terminado. La partida duró {} minuto con {} segundos".format(minutos,segundos))
+    elif int(minutos)==1 and int(segundos)==1:
+        print("Felicitaciones. El juego ha terminado. La partida duró {} minuto con {} segundo".format(minutos,segundos))
+    else:
+        print("Felicitaciones. El juego ha terminado. La partida duró {} minutos con {} segundos".format(minutos,segundos))
+    
     print("Felicitaciones. El juego ha terminado. La partida duró " + str(round(tiempo_final - tiempo_inicial, 2)) + " segundos.")
 
     ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores)
