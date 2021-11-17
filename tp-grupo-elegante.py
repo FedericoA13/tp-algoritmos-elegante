@@ -170,6 +170,20 @@ def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffl
     
     return resultado
 
+def tiempo_total(tiempo_inicial,tiempo_final):
+    """Esta función pasa de segundos a minutos, si lo requiere."""
+    
+    minutos=math.floor((tiempo_final - tiempo_inicial)/60)
+    segundos=math.floor(((tiempo_final - tiempo_inicial)/60-math.floor((tiempo_final - tiempo_inicial)/60))*60)
+    if tiempo_final - tiempo_inicial<60:
+        print(f"Felicitaciones. El juego ha terminado. La partida duró {segundos} segundos")
+    elif int(minutos)==1 and not int(segundos)==1:
+        print(f"Felicitaciones. El juego ha terminado. La partida duró {minutos} minuto con {segundos} segundos")
+    elif int(minutos)==1 and int(segundos)==1:
+        print(f"Felicitaciones. El juego ha terminado. La partida duró {minutos} minuto con {segundos} segundo")
+    else:
+        print(f"Felicitaciones. El juego ha terminado. La partida duró {minutos} minutos con {segundos} segundos")
+
 def interfaz_grafica():
     """
     Autor: Pablo González
@@ -177,11 +191,11 @@ def interfaz_grafica():
     Esta función configura la interfaz gráfica que aparecerá cuando se pida los nombres de los jugadores.
     """
     
-    raiz=Tk()
-    raiz.title("Memotest - Ingreso de nombres")
-    raiz.geometry("400x170")
-    raiz.resizable(0,0)
-    raiz.config(bg="black")
+    ventana=Tk()
+    ventana.title("Memotest - Ingreso de nombres")
+    ventana.geometry("400x170")
+    ventana.resizable(0,0)
+    ventana.config(bg="black")
 
     miframe=Frame()
     miframe.pack()
@@ -191,15 +205,15 @@ def interfaz_grafica():
     miframe.config(bd=10) #tamano del borde
     miframe.config(relief="sunken") #efecto del borde
 
-    milabel=Label(miframe, text="Bienvenidos al juego del memotest").place(x=75,y=10)
-    milabel=Label(miframe, text="Ingrese nombre Jugador 1").place(x=30,y=45)
-    milabel=Label(miframe, text="Ingrese nombre Jugador 2").place(x=30,y=75)
+    etiqueta_bievenidos=Label(miframe, text="Bienvenidos al juego del memotest").place(x=75,y=10)
+    etiqueta_jugador1=Label(miframe, text="Ingrese nombre Jugador 1").place(x=30,y=45)
+    etiqueta_jugador2=Label(miframe, text="Ingrese nombre Jugador 2").place(x=30,y=75)
 
     def codigo_boton():
         if jugador_1.get()=="" or jugador_2.get()=="":
             messagebox.showinfo("Atencion","Por favor, tenes que nombrar a los 2 jugadores")
         else:
-            raiz.destroy()
+            ventana.destroy()
     
     jugador_1=StringVar()
     jugador_2=StringVar()
@@ -209,11 +223,12 @@ def interfaz_grafica():
 
     boton_comenzar_juego=Button(miframe,text="Comenzar a jugar",command=codigo_boton).place(x=125,y=110)
 
-    raiz.mainloop()
+    ventana.mainloop()
     
     matriz_jugadores=[jugador_1.get(),jugador_2.get()]
     
     return matriz_jugadores
+
 
 def main():
     """
@@ -290,19 +305,7 @@ def main():
                     
     tiempo_final=default_timer()
     
-    minutos=math.floor((tiempo_final - tiempo_inicial)/60)
-    segundos=math.floor(((tiempo_final - tiempo_inicial)/60-math.floor((tiempo_final - tiempo_inicial)/60))*60)
-    
-    if tiempo_final - tiempo_inicial<60:
-        print("Felicitaciones. El juego ha terminado. La partida duró {} segundos".format(segundos))
-    elif int(minutos)==1 and not int(segundos)==1:
-        print("Felicitaciones. El juego ha terminado. La partida duró {} minuto con {} segundos".format(minutos,segundos))
-    elif int(minutos)==1 and int(segundos)==1:
-        print("Felicitaciones. El juego ha terminado. La partida duró {} minuto con {} segundo".format(minutos,segundos))
-    else:
-        print("Felicitaciones. El juego ha terminado. La partida duró {} minutos con {} segundos".format(minutos,segundos))
-    
-    print("Felicitaciones. El juego ha terminado. La partida duró " + str(round(tiempo_final - tiempo_inicial, 2)) + " segundos.")
+    tiempo_total(tiempo_inicial,tiempo_final)
 
     ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores)
     
