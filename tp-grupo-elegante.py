@@ -22,12 +22,8 @@ def matriz_juego():
     matriz_letras=(matriz_letras*2)
     random.shuffle(matriz_letras)
     
-    if const.FILAS>1:
-        matriz_posiciones_apiladas=[matriz_posiciones[x:x+const.VALOR] for x in range(0,len(matriz_posiciones),const.VALOR)]
-        matriz_letras_apiladas=[matriz_letras[x:x+const.VALOR] for x in range(0,len(matriz_letras),const.VALOR)]
-    else:
-        matriz_posiciones_apiladas=[matriz_posiciones]
-        matriz_letras_apiladas=[matriz_letras]
+    matriz_posiciones_apiladas=[matriz_posiciones[x:x+const.VALOR] for x in range(0,len(matriz_posiciones),const.VALOR)]
+    matriz_letras_apiladas=[matriz_letras[x:x+const.VALOR] for x in range(0,len(matriz_letras),const.VALOR)]
         
     return matriz_posiciones_apiladas, matriz_letras_apiladas
     
