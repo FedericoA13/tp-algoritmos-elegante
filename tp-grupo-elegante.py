@@ -170,6 +170,12 @@ def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffl
     return resultado
 
 def interfaz_grafica():
+    """
+    Autor: Pablo González
+    
+    Esta función configura la interfaz gráfica que aparecerá cuando se pida los nombres de los jugadores.
+    """
+    
     raiz=Tk()
     raiz.title("Memotest - Ingreso de nombres")
     raiz.geometry("400x170")
