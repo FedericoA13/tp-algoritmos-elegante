@@ -2,6 +2,7 @@ import constantes as const
 import string
 import random
 from timeit import default_timer
+from tkinter import *
 
 def matriz_juego():
     """
@@ -168,6 +169,45 @@ def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffl
     
     return resultado
 
+def interfaz_grafica():
+    raiz=Tk()
+    raiz.title("Memotest - Ingreso de nombres")
+    raiz.geometry("400x170")
+    raiz.resizable(0,0)
+    raiz.config(bg="black")
+
+    miframe=Frame()
+    miframe.pack()
+
+    miframe.config(bg="lightblue")
+    miframe.config(width="350", height="170")
+    miframe.config(bd=10) #tamano del borde
+    miframe.config(relief="sunken") #efecto del borde
+
+    milabel=Label(miframe, text="Bienvenidos al juego del memotest").place(x=75,y=10)
+    milabel=Label(miframe, text="Ingrese nombre Jugador 1").place(x=30,y=45)
+    milabel=Label(miframe, text="Ingrese nombre Jugador 2").place(x=30,y=75)
+
+    def codigo_boton():
+        if jugador_1.get()=="" or jugador_2.get()=="":
+            messagebox.showinfo("Atencion","Por favor, tenes que nombrar a los 2 jugadores")
+        else:
+            raiz.destroy()
+    
+    jugador_1=StringVar()
+    jugador_2=StringVar()
+    
+    cuadro_jugador_1=Entry(miframe, textvariable=jugador_1).place(x=180,y=45)
+    cuadro_jugador_2=Entry(miframe, textvariable=jugador_2).place(x=180,y=75)
+
+    boton_comenzar_juego=Button(miframe,text="Comenzar a jugar",command=codigo_boton).place(x=125,y=110)
+
+    raiz.mainloop()
+    
+    matriz_jugadores=[jugador_1.get(),jugador_2.get()]
+    
+    return matriz_jugadores
+
 def main():
     """
     Autor: en conjunto
@@ -175,11 +215,9 @@ def main():
     En esta función se inicia el juego, se llama a las demás funciones que forman el programa
     y da información sobre la partida, desde que se inicia hasta su fin.
     """
-    print("Bienvenido al juego del Memotest")
-    jugador_1=str(input("Jugador 1, ingrese su nombre: "))
-    jugador_2=str(input("Jugador 2, ingrese su nombre: "))
+
     tiempo_inicial=default_timer()
-    matriz_jugadores=[jugador_1,jugador_2]
+    matriz_jugadores=interfaz_grafica() #la matriz de jugadores proviene de la interfaz grafica de tkinter
     random.shuffle(matriz_jugadores)
     turno_jugador_shuffle=matriz_jugadores[0]
     
