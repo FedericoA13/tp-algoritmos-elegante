@@ -1,21 +1,25 @@
 import constantes as const
 import string
 import random
+from timeit import default_timer
 
 def matriz_juego():
-    #creo 1 matriz de numeros que es la que vera el usuario
+    """
+    Autor: Fernando Michnowicz
+    
+    Esta función crea la matriz que figurará en pantalla para el juego del memotest,
+    le inserta las fichas y las reparte aleatoriamente.
+    """
     matriz_posiciones=[]
     for i in range(1,int(const.FILAS*const.COLUMNAS+1)):
         matriz_posiciones.append(i)
 
-    #creo una matriz de letras aleatoria
     matriz_letras=[]
     matriz_letras_total=string.ascii_letters
     matriz_letras=random.sample(matriz_letras_total,int(const.FILAS*const.COLUMNAS/2))
     matriz_letras=(matriz_letras*2)
     random.shuffle(matriz_letras)
     
-    #Agarro la matriz_posiciones y la matriz_letras, las corto en partes = y las apilo cada 1 en su matriz     
     if const.FILAS>1:
         matriz_posiciones_apiladas=[matriz_posiciones[x:x+const.VALOR] for x in range(0,len(matriz_posiciones),const.VALOR)]
         matriz_letras_apiladas=[matriz_letras[x:x+const.VALOR] for x in range(0,len(matriz_letras),const.VALOR)]
@@ -26,11 +30,17 @@ def matriz_juego():
     return matriz_posiciones_apiladas, matriz_letras_apiladas
     
 def mostrar_fichas_posiciones(matriz_posiciones_apiladas):
-    #esta funcion convierte la matriz_posiciones_apiladas en su version para ser impresa en pantalla
+    """
+    Autor: Federico Aldrighetti
+    
+    Esta función modifica la matriz creada para que se pueda imprimir en pantalla. En los
+    números del 1 al 9, se agregará un espacio en la ficha para que el número quede bien
+    alineado en la matriz.
+    
+    """
     print("Fichas y Posiciones: ")
     for i in range(int(const.FILAS)):
         for j in range(int(const.COLUMNAS)):
-            #si el numero de posicion en la matriz es < 10 necesita agregarle un espacio para que los numeros queden bien alineados en la matriz impresa
             if len(str(matriz_posiciones_apiladas[i][j]))==1:
                 print("[ ",str(matriz_posiciones_apiladas[i][j]),"]", end=" ")
             else:
@@ -40,8 +50,14 @@ def mostrar_fichas_posiciones(matriz_posiciones_apiladas):
     return
 
 def conversor_matriz(matriz):
+    """
+    Autor: Fernando Michnowicz
+    
+    Toma la matriz con las letras ya asignadas y la divide para imprimir en pantalla.
+    Luego la rearma para facilitar la búsqueda de la ficha al ingresar una posición.
+    """
 #esta funcion convierte 1 matriz con 1 sola fila en una matriz con varias filas que coinciden con el
-#parametro FILAS seteado al principio. Y viciversa, convierte una matriz de varias filas en una
+#parametro FILAS seteado al principio. Y viceversa, convierte una matriz de varias filas en una
 #de 1 sola fila
     if len(matriz)>1:
         matriz_nueva=[]
@@ -55,6 +71,12 @@ def conversor_matriz(matriz):
     return matriz_nueva
 
 def pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion):
+    """
+    Autor: Federico Aldrighetti
+    
+    Esta función valida los ingresos de los jugadores, avisa cuando un input
+    no es válido y en este caso, solicita que se vuelva a ingresar
+    """
     validacion_posicion=False
     matriz_a_chequear=conversor_matriz(matriz_posiciones_apiladas)
     
@@ -82,7 +104,11 @@ def pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion):
     return posicion
 
 def buscar_reemplazar_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas,posicion):
-    #esta funcion reemplaza el valor que se ve en la pantalla de la posicion con la letra que esta oculta en esa misma posicion
+    """
+    Autores: Lautaro López y Germán Seckar
+    
+    Esta función reemplaza el valor que se ve en la pantalla de la posición con la letra que está oculta en esa misma posición
+    """
     
     #convierto las matrices de posiciones y letras en matrices de 1 sola fila para facilitar operaciones de buscar y encontrar numeros/letras 
     matriz_letras_apiladas=conversor_matriz(matriz_letras_apiladas)
@@ -97,10 +123,15 @@ def buscar_reemplazar_posiciones(matriz_posiciones_apiladas,matriz_letras_apilad
     return ficha, matriz_posiciones_apiladas, matriz_letras_apiladas
     
 def resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas,posicion1,posicion2):
-    #si el jugador no acierta la letra con las fichas escogidas esta funcion resetea los valores de la matriz de posiciones
-    #a la posicion que ocupaba la letra (es la inversa de la funcion buscar_reemplazar_posiciones)
+    """
+    Autores: Lautaro López y Germán Seckar
     
-    #creo lista con numeros que son los que van a reemplazar a las letras (notar que tiene el mismo orden que la matriz_posiciones_apiladas)
+    Si el jugador no acierta la letra con las fichas escogidas, esta función resetea los valores de la matriz de posiciones
+    a la posicion que ocupaba la letra (es la inversa de la función buscar_reemplazar_posiciones). También crea una lista
+    con números que son los que van a reemplazar a las letras (notar que tiene el mismo orden que la matriz_posiciones_apiladas).
+    
+    """
+    
     lista_validacion=[x for x in range(1,int(const.FILAS*const.COLUMNAS+1))]
     
     matriz_posiciones_apiladas=conversor_matriz(matriz_posiciones_apiladas)
@@ -115,7 +146,14 @@ def resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas
     return matriz_posiciones_apiladas, matriz_letras_apiladas
 
 def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores):
-    #esta funcion devuelve al ganador del juego si hubo uno o muestra empate
+    """
+    Autor: Pablo González
+    
+    Esta función devuelve al ganador del juego si es que hubo uno, o muestra empate. En el caso de que
+    los dos jugadores hayan encontrado la misma cantidad de fichas, el ganador será el que menos intentos
+    haya necesitado.
+    """
+    
     if letras_descubiertas_jugador_shuffle_1>letras_descubiertas_jugador_shuffle_2:
         resultado=print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[jugador_shuffle_1],letras_descubiertas_jugador_shuffle_1))
     elif letras_descubiertas_jugador_shuffle_1<letras_descubiertas_jugador_shuffle_2:
@@ -131,14 +169,21 @@ def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffl
     return resultado
 
 def main():
+    """
+    Autor: en conjunto
+    
+    En esta función se inicia el juego, se llama a las demás funciones que forman el programa
+    y da información sobre la partida, desde que se inicia hasta su fin.
+    """
     print("Bienvenido al juego del Memotest")
     jugador_1=str(input("Jugador 1, ingrese su nombre: "))
     jugador_2=str(input("Jugador 2, ingrese su nombre: "))
+    tiempo_inicial=default_timer()
     matriz_jugadores=[jugador_1,jugador_2]
     random.shuffle(matriz_jugadores)
     turno_jugador_shuffle=matriz_jugadores[0]
     
-    print("Comenzara jugando:",turno_jugador_shuffle)
+    print("Comenzará jugando:",turno_jugador_shuffle)
     
     matriz_posiciones_apiladas, matriz_letras_apiladas=matriz_juego()
     mostrar_fichas_posiciones(matriz_posiciones_apiladas)
@@ -192,13 +237,15 @@ def main():
                 if turno_jugador_shuffle==matriz_jugadores[jugador_shuffle_1]:
                     intentos_jugador_shuffle_1+=1
                     letras_descubiertas_jugador_shuffle_1+=1
-                    print("Muy bien",matriz_jugadores[jugador_shuffle_1],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_1],"encontraste un par de letras iguales. Ya no quedan más letras por encontrar")
                 else:
                     intentos_jugador_shuffle_2+=1
                     letras_descubiertas_jugador_shuffle_2+=1
-                    print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Ya no quedan más letras por encontrar")
                     
-    print("Felicitaciones. El juego ha terminado")
+    tiempo_final=default_timer()
+    print("Felicitaciones. El juego ha terminado. La partida duró " + str(round(tiempo_final - tiempo_inicial, 2)) + " segundos.")
+
     ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores)
     
 main()
