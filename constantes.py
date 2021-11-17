@@ -1,3 +1,3 @@
-FILAS = 4 # este valor es modificable
-COLUMNAS = 4 # este valor es fijo
-VALOR = 4 # valores en cada fila
+FILAS = 4
+COLUMNAS = 4
+VALOR = 4
