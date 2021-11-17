@@ -114,7 +114,7 @@ def resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas
     
     return matriz_posiciones_apiladas, matriz_letras_apiladas
 
-def ganador_memotest(intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores):
+def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores):
     #esta funcion devuelve al ganador del juego si hubo uno o muestra empate
     if letras_descubiertas_jugador_shuffle_1>letras_descubiertas_jugador_shuffle_2:
         resultado=print("El ganador de la partida es {} con {} pares de fichas encontradas".format(matriz_jugadores[jugador_shuffle_1],letras_descubiertas_jugador_shuffle_1))
@@ -199,6 +199,6 @@ def main():
                     print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Ya no quedan mas letras por encontrar")
                     
     print("Felicitaciones. El juego ha terminado")
-    ganador_memotest(intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores)
+    ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffle_1,intentos_jugador_shuffle_2,letras_descubiertas_jugador_shuffle_1,letras_descubiertas_jugador_shuffle_2,matriz_jugadores)
     
 main()
