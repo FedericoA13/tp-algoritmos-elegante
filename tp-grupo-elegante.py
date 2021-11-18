@@ -54,9 +54,7 @@ def conversor_matriz(matriz):
     Toma la matriz con las letras ya asignadas y la divide para imprimir en pantalla.
     Luego la rearma para facilitar la búsqueda de la ficha al ingresar una posición.
     """
-#esta funcion convierte 1 matriz con 1 sola fila en una matriz con varias filas que coinciden con el
-#parametro FILAS seteado al principio. Y viceversa, convierte una matriz de varias filas en una
-#de 1 sola fila
+
     if len(matriz)>1:
         matriz_nueva=[]
         for sublista in matriz:
@@ -78,8 +76,6 @@ def pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion):
     validacion_posicion=False
     matriz_a_chequear=conversor_matriz(matriz_posiciones_apiladas)
     
-    #esta funcion validara que el numero ingresado sea un entero, este en las posiciones mostradas en la
-    #pantalla y ademas no haya sido seleccionado antes
     while not validacion_posicion:
         try:
             if contador_posicion==1:
@@ -93,10 +89,10 @@ def pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion):
                     print("Ingresaste un valor ya seleccionado antes. Volve a ingresar otro valor")
                     validacion_posicion=False    
             else:
-                print("Ingresaste un valor fuera del rango permitido. Solo podes ingresar los valores que ves en pantalla. Volve a ingresar otro valor")
+                print("Ingresaste un valor fuera del rango permitido. Solo podés ingresar los valores que ves en pantalla. Volvé a ingresar otro valor")
                 validacion_posicion=False
         except:
-            print("Ingresaste un valor o caracter no permitido. Solo podes ingresar los valores que ves en pantalla. Vuelve a ingresar otro valor")
+            print("Ingresaste un valor o caracter no permitido. Solo podés ingresar los valores que ves en pantalla. Volvé a ingresar otro valor")
             validacion_posicion=False
             
     return posicion
@@ -105,16 +101,15 @@ def buscar_reemplazar_posiciones(matriz_posiciones_apiladas,matriz_letras_apilad
     """
     Autores: Lautaro López y Germán Seckar
     
-    Esta función reemplaza el valor que se ve en la pantalla de la posición con la letra que está oculta en esa misma posición
+    Esta función reemplaza el valor que se ve en la pantalla de la posición con la letra que está oculta en esa misma posición.
+    Convierte las matrices de posiciones y letras en matrices de una sola fila para facilitar operaciones de buscar y encontrar fichas. 
     """
-    
-    #convierto las matrices de posiciones y letras en matrices de 1 sola fila para facilitar operaciones de buscar y encontrar numeros/letras 
+
     matriz_letras_apiladas=conversor_matriz(matriz_letras_apiladas)
     ficha=matriz_letras_apiladas[0][posicion]
     matriz_posiciones_apiladas=conversor_matriz(matriz_posiciones_apiladas)
     matriz_posiciones_apiladas[0][posicion]=str(ficha)
     
-    #reconvierto matrices para que se muestren correctamente en pantalla
     matriz_letras_apiladas=conversor_matriz(matriz_letras_apiladas)
     matriz_posiciones_apiladas=conversor_matriz(matriz_posiciones_apiladas)
     
@@ -167,7 +162,11 @@ def ganador_memotest(jugador_shuffle_1,jugador_shuffle_2,intentos_jugador_shuffl
     return resultado
 
 def tiempo_total(tiempo_inicial,tiempo_final):
-    """Esta función pasa de segundos a minutos, si lo requiere."""
+    """
+    Autor: Lautaro López
+
+    Esta función pasa de segundos a minutos, si lo requiere.
+    """
     
     minutos=math.floor((tiempo_final - tiempo_inicial)/60)
     segundos=math.floor(((tiempo_final - tiempo_inicial)/60-math.floor((tiempo_final - tiempo_inicial)/60))*60)
@@ -198,8 +197,8 @@ def interfaz_grafica():
 
     miframe.config(bg="lightblue")
     miframe.config(width="350", height="170")
-    miframe.config(bd=10) #tamano del borde
-    miframe.config(relief="sunken") #efecto del borde
+    miframe.config(bd=10)
+    miframe.config(relief="sunken")
 
     etiqueta_bievenidos=Label(miframe, text="Bienvenidos al juego del memotest").place(x=75,y=10)
     etiqueta_jugador1=Label(miframe, text="Ingrese nombre Jugador 1").place(x=30,y=45)
@@ -278,7 +277,6 @@ def main():
             mostrar_fichas_posiciones(matriz_posiciones_apiladas)
         else:
             letras_descubiertas+=1
-            #esta parte le informa al jugador que puede continuar jugando porque aun hay letras sin encontrar
             if letras_descubiertas<int(const.FILAS*const.COLUMNAS/2):
                 if turno_jugador_shuffle==matriz_jugadores[jugador_shuffle_1]:
                     intentos_jugador_shuffle_1+=1
@@ -287,8 +285,7 @@ def main():
                 else:
                     intentos_jugador_shuffle_2+=1
                     letras_descubiertas_jugador_shuffle_2+=1
-                    print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Puedes continuar jugando")
-            #esta parte le informa al jugador que todas las letras fueron descubiertas                    
+                    print("Muy bien",matriz_jugadores[jugador_shuffle_2],"encontraste un par de letras iguales. Puedes continuar jugando")                
             else:
                 if turno_jugador_shuffle==matriz_jugadores[jugador_shuffle_1]:
                     intentos_jugador_shuffle_1+=1
