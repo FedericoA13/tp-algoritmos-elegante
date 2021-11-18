@@ -99,7 +99,7 @@ def pedir_validar_posiciones(matriz_posiciones_apiladas,contador_posicion):
 
 def buscar_reemplazar_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas,posicion):
     """
-    Autores: Lautaro López y Germán Seckar
+    Autor: Germán Seckar
     
     Esta función reemplaza el valor que se ve en la pantalla de la posición con la letra que está oculta en esa misma posición.
     Convierte las matrices de posiciones y letras en matrices de una sola fila para facilitar operaciones de buscar y encontrar fichas. 
@@ -117,7 +117,7 @@ def buscar_reemplazar_posiciones(matriz_posiciones_apiladas,matriz_letras_apilad
     
 def resetear_matriz_posiciones(matriz_posiciones_apiladas,matriz_letras_apiladas,posicion1,posicion2):
     """
-    Autores: Lautaro López y Germán Seckar
+    Autor: Germán Seckar
     
     Si el jugador no acierta la letra con las fichas escogidas, esta función resetea los valores de la matriz de posiciones
     a la posicion que ocupaba la letra (es la inversa de la función buscar_reemplazar_posiciones). También crea una lista
