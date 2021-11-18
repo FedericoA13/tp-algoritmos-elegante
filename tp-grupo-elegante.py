@@ -10,7 +10,8 @@ def matriz_juego():
     Autor: Fernando Michnowicz
     
     Esta función crea la matriz que figurará en pantalla para el juego del memotest,
-    le inserta las fichas y las reparte aleatoriamente.
+    y crea otra matriz asociada a la misma compuesta con letras aleatoriamente
+    distribuidas.
     """
     matriz_posiciones=[]
     for i in range(1,int(const.FILAS*const.COLUMNAS+1)):
@@ -51,8 +52,9 @@ def conversor_matriz(matriz):
     """
     Autor: Fernando Michnowicz
     
-    Toma la matriz con las letras ya asignadas y la divide para imprimir en pantalla.
-    Luego la rearma para facilitar la búsqueda de la ficha al ingresar una posición.
+    Esta función convierte una lista con multiples listas en su interior en una lista con 1 sola lista
+    en su interior y viciversa. El objetivo es facilitar operaciones de validacion, busqueda de posiciones y
+    reemplazo por letras y/o numeros en la matriz que el usuario ve en pantalla a medida que escoge posiciones.
     """
 
     if len(matriz)>1:
