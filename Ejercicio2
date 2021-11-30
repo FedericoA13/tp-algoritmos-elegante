@@ -1,0 +1,52 @@
+# Escribi una función que reciba una lista de tuplas de audiolibros.
+# Cada tupla tiene el autor de un audiolibro y la  duracion del mismo en minutos.
+# La funcion debe devolver True si encuentra que hay al menos un audiolibro que te interese escuchar.
+# 
+# Los audiolibros que te interesan son los que cumplen alguna de las siguientes condiciones:
+# 
+# - El autor sea "Jorge Luis Borges", "J. K. Rowling" o "Stephen King"
+# - La duracion sea menos de 2 horas o más de 10
+# 
+# Comproba el correcto funcionamiento, mediante los siguientes casos de prueba usando la librería doctest.
+# Ademas, agregá DOS casos de prueba adicionales,en donde uno sea Falso y el otro Verdadero.
+# 
+# Casos de Prueba:
+# 
+#     >>> filtrar_audiolibros( [("Jorge Luis Borges", 180), ("Richard Dawkins", 220), ("José Saramago", 520)] )
+#     True
+#     >>> filtrar_audiolibros( [("Paulo Coelho", 480), ("Jimena La Torre", 500), ("Anónimo", 599)] )
+#     False
+#     >>> filtrar_audiolibros( [("Mark Twain", 100), ("Dan Brown", 1000), ("Fredrik Backman", 400)] )
+#     True
+
+autores=["Jorge Luis Borges","J. K. Rowling","Stephen King"]
+autor=0 #posicion que ocupa el autor en cada tupla
+duracion=1 #posicion que ocupa la duracion del audiolibro en cada tupla
+
+def filtrar_audiolibros(lista):
+    """
+    >>> filtrar_audiolibros( [("Jorge Luis Borges", 180), ("Richard Dawkins", 220), ("José Saramago", 520)] )
+    True
+    >>> filtrar_audiolibros( [("Paulo Coelho", 480), ("Jimena La Torre", 500), ("Anónimo", 599)] )
+    False
+    >>> filtrar_audiolibros( [("Mark Twain", 100), ("Dan Brown", 1000), ("Fredrik Backman", 400)] )
+    True
+    >>> filtrar_audiolibros( [("Roberto Arlt", 1500), ("Julio Cortazar", 10), ("Ricardo Piglia", 185)] )
+    True
+    >>> filtrar_audiolibros( [("Paul Auster", 375), ("Agatha Christie", 345), ("Autor desconocido", 475)] )
+    False
+    
+    """
+
+    n=len(lista)
+    devolver=False
+    
+    for tupla in range(0,n):
+        if lista[tupla][autor] in autores:
+            devolver=True
+        elif lista[tupla][duracion]<120 or lista[tupla][duracion]>600:
+            devolver=True
+    return print(devolver)
+
+import doctest
+print(doctest.testmod())
