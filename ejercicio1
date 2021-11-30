@@ -1,0 +1,57 @@
+# Escribir una función que reciba una cadena de caracteres y devuelva una tupla con  la cantidad de vocales
+# encontradas para cada una de las 5 vocales.
+# No debe diferenciar entre letras mayúsculas, minúsculas, ni vocales acentuadas.
+# Cada posición en la tupla, corresponde a una de las vocales, vea los casos de prueba.
+# NO PUEDE UTILIZAR para esta solución, ninguno de los métodos provistos por el lenguaje para el tratamiento
+# de cadenas, como: count, find, index, rindex, etc.
+# 
+# Deberá comprobar el correcto funcionamiento, mediante los siguientes casos de prueba usando la librería
+# doctest.
+# 
+# Para ("aeiou") debe devolver (1,1,1,1,1)
+# Para ("") debe devolver (0,0,0,0,0)
+# Para ("Yo los conozco, son ocho los monos!") debe devolver (0,0,0,11,0)
+# Para ("MURCIÉLAGO") debe devolver (1,1,1,1,1)
+# Para ("3004924024004232-1") debe devolver (0,0,0,0,0)
+# Para ("AaáEeIiOoUuú") debe devolver (3,2,2,2,3)
+
+def contar_vocales(cadena):
+    """
+    >>> contar_vocales("aeiou")
+    (1, 1, 1, 1, 1)
+    >>> contar_vocales("")
+    (0, 0, 0, 0, 0)
+    >>> contar_vocales("Yo los conozco, son ocho los monos!")
+    (0, 0, 0, 11, 0)
+    >>> contar_vocales("MURCIÉLAGO")
+    (1, 1, 1, 1, 1)
+    >>> contar_vocales("3004924024004232-1")
+    (0, 0, 0, 0, 0)
+    >>> contar_vocales("AaáEeIiOoUuú")
+    (3, 2, 2, 2, 3)
+    """
+        
+    cantidad_vocal_a=0
+    cantidad_vocal_e=0
+    cantidad_vocal_i=0
+    cantidad_vocal_o=0
+    cantidad_vocal_u=0
+    
+    if cadena=="":
+        cantidad_vocales=(0,0,0,0,0)
+    for letra in cadena.lower():
+        if letra=="a" or letra=="á":
+            cantidad_vocal_a+=1
+        elif letra=="e" or letra=="é":
+            cantidad_vocal_e+=1
+        elif letra=="i" or letra=="í":
+            cantidad_vocal_i+=1
+        elif letra=="o" or letra=="ó":
+            cantidad_vocal_o+=1
+        elif letra=="u" or letra=="ú":
+            cantidad_vocal_u+=1
+        cantidad_vocales=(cantidad_vocal_a,cantidad_vocal_e,cantidad_vocal_i,cantidad_vocal_o,cantidad_vocal_u)
+    return print(cantidad_vocales)
+
+import doctest
+print(doctest.testmod())
