@@ -1,0 +1,61 @@
+# El diccionario de alimentos tiene cargado para cada alimento una lista de 3 enteros que representan:
+# - la cantidad de calorías en kCal, 
+# - sodio en mg y 
+# - grasas trans en g por cada porción de alimento, 
+# en ese orden.
+# 
+# Se pide que armes un programa en Python, compuesto por funciones que:
+# 
+# Reciba una lista de alimentos y una cantidad de calorías y devuelva una lista solo con aquellos alimentos
+# que no sobrepasen el valor calórico indicado.
+# Reciba una lista de alimentos y devuelva el promedio de sodio y el promedio de grasas trans
+# Muestre qué alimento tiene mayor proporción de sodio respecto a las calorías.
+# NOTA: En este archivo tenes el diccionario que debes usar. Declará en tu programa la función
+# obtener_diccionario que tenga los datos del diccionario y te lo devuelva, para usarlo.
+
+posicion_alimento=0 #posicion que ocupa en la sublista
+posicion_calorias=0 #posicion que ocupa en la sublista
+posicion_sodio=1 #posicion que ocupa en la sublista
+posicion_grasas_trans=2 #posicion que ocupa en la sublista
+
+def obtener_diccionario():
+    alimentos = {}
+    alimentos["fideos"] = [1000, 400, 30]
+    alimentos["hamburguesa"] = [4000, 800, 130] 
+    alimentos["atún"] = [500, 200, 20] 
+    alimentos["gelatina"] = [100, 20, 5] 
+    alimentos["alfajor"] = [300, 50, 60]
+    lista_alimentos=list(alimentos.items())
+    return lista_alimentos
+
+def alimentos_calorias(lista,calorias):
+    n=len(lista)
+    lista_alimentos_calorias_filtrada=[]
+    for i in range(0,n):
+        if lista[i][1][posicion_calorias]<=calorias: #posicion que ocupan las calorias en cada sublista
+            lista_alimentos_calorias_filtrada.append(lista[i][posicion_calorias])
+    return print(lista_alimentos_calorias_filtrada)
+
+def sodio_grasas_trans(lista):
+    n=len(lista)
+    cantidad_sodio=0
+    cantidad_grasas_trans=0
+    for i in range (0,n):
+        cantidad_sodio=cantidad_sodio+lista[i][1][posicion_sodio] #posicion que ocupa el sodio en cada sublista
+        cantidad_grasas_trans=cantidad_grasas_trans+lista[i][1][posicion_grasas_trans] #posicion que ocupa las grasas trans en cadad sublista
+    promedio_sodio=cantidad_sodio/n
+    promedio_grasas_trans=cantidad_grasas_trans/n
+    
+    return print(promedio_sodio,promedio_grasas_trans)
+
+def proporcion_sodio_calorias(lista):
+    lista_ordenada=sorted(lista,key=lambda x: (x[1][posicion_sodio]/x[1][posicion_grasas_trans]), reverse=True)
+    return print(lista_ordenada[0][posicion_alimento])
+        
+def main():
+    lista=obtener_diccionario()
+    calorias=500
+    alimentos_calorias(lista,calorias)
+    sodio_grasas_trans(lista)
+    proporcion_sodio_calorias(lista)
+main()
